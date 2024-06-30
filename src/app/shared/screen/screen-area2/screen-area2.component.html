@@ -1,0 +1,11 @@
+
+    <div class="container-sub-level">
+        <div class="header-bar">
+            <button mat-icon-button (click)="screenState.closeArea2()"><mat-icon>close</mat-icon></button>
+            <span class="area-title">{{title | translate}}</span> 
+        </div>
+		<div fxLayout="column wrap" fxLayoutGap="0px" >
+		<ng-content></ng-content>
+		</div>
+	</div>
+

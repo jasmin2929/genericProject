@@ -1,0 +1,16 @@
+
+table.attributes {  
+/*  border-collapse: collapse;  */
+  width: 100%; 
+  background-color: white;
+}  
+  
+td {  
+/*  border: 1px solid #ddd;  */
+  border:0;
+  padding: 8px;  
+  text-align: left;  
+}  
+  
+td.attribute-label {  
+}  

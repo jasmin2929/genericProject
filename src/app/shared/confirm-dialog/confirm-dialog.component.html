@@ -1,0 +1,24 @@
+
+<button mat-icon-button class="closeButton"
+  (click)="onClose()"><mat-icon>close</mat-icon></button>
+  <h1 mat-dialog-title>{{title}}</h1>
+
+<div mat-dialog-content>
+  <p>{{message}}</p>
+</div>
+
+<div *ngIf="detailsExist">
+  <a (click)="toggleCollapse()" cButton class="me-1" color="primary"
+    style="color: black; cursor: pointer;">Details</a>
+  <div cCollapse [hidden]="invisible">
+    <mat-card class="scroll-box">
+      {{detailsContent}}
+    </mat-card>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <div class="vertical-center">
+    <button mat-raised-button color="primary" (click)="onOption1()">{{option1}}</button>
+    <button mat-raised-button (click)="onOption2()">{{option2}}</button>
+  </div>
+</div>

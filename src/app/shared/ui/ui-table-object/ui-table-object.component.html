@@ -1,0 +1,8 @@
+<table class="attributes">  
+  <tr *ngFor="let row of rows; let i = index">  
+    <ng-container *ngFor="let attribute of row; let i = index">  
+        <td class="attribute-label">{{ t(attribute) | translate }}</td>  
+        <td class="attribute-value">{{ getValue(attribute) }}</td>  
+    </ng-container>
+  </tr>  
+</table>  

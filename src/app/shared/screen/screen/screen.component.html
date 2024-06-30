@@ -1,0 +1,8 @@
+<div fxLayout="row" fxLayoutAlign="left none">
+    <!-- expanding width to 100% in "max" mode -->
+    <div id="mainPage" class="container-main" fxLayout="column wrap"  fxLayoutGap="10px" 
+        *ngIf="screenState.showArea1" [style.width]="(screenState.mode == 'default' ? '':'100%')" style="background-color: white;">
+    <ng-content></ng-content>
+    </div>
+</div>
+

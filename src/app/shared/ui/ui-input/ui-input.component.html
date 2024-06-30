@@ -1,0 +1,22 @@
+<mat-form-field>
+    <mat-label>{{config.label | translate}} </mat-label>
+    <input matInput  placeholder="{{config.label | translate}}"
+        [(ngModel)]="config.value"
+        (ngModelChange)="onModelChange($event)"
+        [matAutocomplete]="matAutocomplete"
+        [formControl]="formControl"
+        >
+
+    <mat-autocomplete #matAutocomplete="matAutocomplete">  
+        <mat-option *ngFor="let option of autoValueList | async" [value]="option">  
+        {{ option }}  
+        </mat-option>  
+    </mat-autocomplete>  
+
+    <button mat-button *ngIf="config.value" matSuffix  mat-icon-button aria-label="Clear"  
+            (click)="clearModel()">  
+        <mat-icon>close</mat-icon>  
+    </button>  
+
+</mat-form-field>
+

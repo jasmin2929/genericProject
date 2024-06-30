@@ -1,0 +1,21 @@
+
+			<div fxLayout="column wrap">
+                <span class="area-title">{{title}}</span>
+            </div>
+<!-- TODO#if any related links -->
+            <div fxLayout="column wrap" >
+                <span class="related-screen-links">Related Links</span>
+                <a >
+                MY LLINK 1
+                </a>
+                <a >
+                    MY Link2 
+                </a>
+            </div>
+
+	<div style="width:100%;" class="area-control">
+		<button *ngIf="screenState.mode == 'default' && screenState.showArea3" mat-icon-button (click)="screenState.maximize()"><mat-icon>fullscreen</mat-icon></button>
+		<button *ngIf="screenState.mode != 'default'" mat-icon-button (click)="screenState.minimize()"><mat-icon>fullscreen_exit</mat-icon></button>
+	</div>
+
+ 

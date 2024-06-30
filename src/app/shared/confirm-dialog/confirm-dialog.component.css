@@ -1,0 +1,25 @@
+.scroll-box {
+    overflow-y: scroll;
+    height: 100px;
+    padding: 1rem
+}
+.closeButton {
+    float: right;
+    width: 24px;
+    height: 24px;
+
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    .mat-icon {
+        width: 16;
+        height: 16;
+    }
+}
+.vertical-center {
+    margin: auto;
+}
+h1{
+    padding: 20px 0px 10px 0px;
+}

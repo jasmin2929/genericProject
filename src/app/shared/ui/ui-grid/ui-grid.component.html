@@ -1,0 +1,66 @@
+                <div *ngIf="noMatchingRecord">
+                    No matching Datasets
+                </div>
+
+                <div class="scrollableTable" style="min-height:400px">
+                    <table mat-table class="mdl-data-table"
+                        [dataSource]="dataSource"
+                        *ngIf="!paginatorConfig.hidden" matSort
+                        (matSortChange)="onMatSortChange($event)"
+                        >
+                        <!---Checkbox--Column---------------------------------------------->
+                        <ng-container matColumnDef="select" sticky>
+                            <th mat-header-cell *matHeaderCellDef
+                                class="mdl-data-table__cell--non-numeric">
+                                <mat-checkbox
+                                    (change)="$event ? masterToggle() : null"
+                                    class="checkbox"
+                                    [checked]="userSelection.hasValue() && isAllSelected()"
+                                    [indeterminate]="userSelection.hasValue() && !isAllSelected()">
+                                </mat-checkbox>
+                            </th>
+                            <td mat-cell *matCellDef="let row"
+                                class="mdl-data-table__cell--non-numeric">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? userSelection.toggle(row) : null"
+                                    [checked]="userSelection.isSelected(row)">
+                                </mat-checkbox>
+                            </td>
+                        </ng-container>
+                        <!-------other-Columns---------------------------------------------->
+                        <!--columns starts with index 1, because of select checkbox-->
+                        <ng-container
+                            *ngFor="let column of _dataSetColumnList | slice:1"
+                            [matColumnDef]="column">
+                            <!--hide context cells-->
+                            <th mat-header-cell *matHeaderCellDef
+                                class="mdl-data-table__cell--non-numeric breakCell"
+                                mat-sort-header
+                                [hidden]="column == 'DATA_SET_SOURCE_ID' ||column == 'CONTEXT' || column == 'TYPE' || column == 'INSERT_BY' || column == 'LAST_UPD_BY'">
+                                {{t(column) | translate}}</th>
+                            <td mat-cell *matCellDef="let row"
+                                class="mdl-data-table__cell--non-numeric breakCell"
+                                [hidden]="column == 'DATA_SET_SOURCE_ID' || column ==  'CONTEXT' || column == 'TYPE' || column == 'INSERT_BY' || column == 'LAST_UPD_BY'">
+                                {{settings.isDate(row[column]) ? (row[column] |
+                                date : settings.TIME_FORMAT) : row[column]}}</td>
+                        </ng-container>
+                        <tr id="rows" mat-header-row
+                            *matHeaderRowDef="_dataSetColumnList"></tr>
+                        <tr mat-row
+                            *matRowDef="let row; columns: _dataSetColumnList; let i= index;"
+                            (click)="onRowSelected(row, i)"></tr>
+                    </table>
+                </div>
+                <div [hidden]="paginatorConfig.hidden">
+                    <mat-paginator #dataSetPaginator
+                        (page)="onPageEvent($event)"
+                        [length]="paginatorConfig.length"
+                        [pageSize]="paginatorConfig.pageSize"
+                        [disabled]="paginatorConfig.disabled"
+                        [showFirstLastButtons]="paginatorConfig.showFirstLastButtons"
+                        [pageSizeOptions]="paginatorConfig.showPageSizeOptions ? paginatorConfig.pageSizeOptions : []"
+                        [hidePageSize]="paginatorConfig.hidePageSize"
+                        [pageIndex]="paginatorConfig.pageIndex"
+                        aria-label="Select page">
+                    </mat-paginator>
+                </div>

@@ -1,0 +1,53 @@
+<app-screen-search [screenState]="screenState">
+    <app-screen-search-top-container>
+        <app-screen-search-top-header [screenState]="screenState" title="{{'genericComponent.title' | translate }}" style="background-color: white;">
+        </app-screen-search-top-header>
+
+        <app-screen-search-top-body [screenState]="screenState">            
+
+            <app-ui-input  [config]="inputByName['typeCd']"
+                (ngModelChange)="inputByName['typeCd'].value = $event"
+                >
+            </app-ui-input> 
+
+            <app-ui-input  [config]="inputByName['subTypeCd']"
+                (ngModelChange)="inputByName['subTypeCd'].value = $event"
+                >
+            </app-ui-input> 
+
+            <button class="btn-search" mat-raised-button
+                (click)="buildDataSearchCriterias()">
+                <mat-icon>search</mat-icon>
+            </button>
+
+
+        </app-screen-search-top-body>
+    </app-screen-search-top-container>
+    <app-screen-search-bottom-container style="max-width:100%">
+        <app-screen-search-area1 [screenState]="screenState"  [fxFlex]="screenState.fxFlexArea1" *ngIf="screenState.mode == 'default'"  >  
+                <app-ui-grid 
+                     l10nPath="{{l10nPath}}.attributes"
+                     [paginatorConfig]="searchPaginatorConfig"
+                     [dataSource] = "searchDataSource"
+                     [userSelection] = "userSelection"
+                     [dataSetColumnList] = "searchColumnList"
+                     [noMatchingRecord] = "noMatchingSearchResults"
+                     (matSortChange)="onSearchResultOrderByClick($event)"
+                     (rowSelected)="onSearchResultEntryClick($event)"
+                     (pageEvent)="handlePageEventData($event)">
+            </app-ui-grid>
+        </app-screen-search-area1>
+        <app-screen-search-area2 title="{{'genericComponent.area2.title' | translate}}" [screenState]="screenState" *ngIf="screenState.showArea2" [fxFlex]="screenState.fxFlexArea2"> 
+            <app-ui-table-object
+                l10nPath="{{l10nPath}}.attributes"
+                [record]="selectedSearchItemData"  
+                [attributeList]="searchColumnList"  
+                [columns]="2"
+            >
+            </app-ui-table-object>  
+        </app-screen-search-area2>
+        <app-screen-search-area3 title="{{'genericComponent.area3.title' | translate}}" [screenState]="screenState" *ngIf="screenState.showArea3" [fxFlex]="screenState.fxFlexArea3">  
+        </app-screen-search-area3>
+
+    </app-screen-search-bottom-container>
+</app-screen-search>
